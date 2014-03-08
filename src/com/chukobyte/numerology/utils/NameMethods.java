@@ -3,8 +3,6 @@ package com.chukobyte.numerology.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chukobyte.numerology.R;
-
 public class NameMethods {
 	
 	BirthdateMethods bm = new BirthdateMethods();
@@ -16,9 +14,9 @@ public class NameMethods {
 		String compoundNumber;
 		
 		//Strips string of vowel or consonant depending on what box is checked.
-		if(vowelConsonantsChecked == R.id.vowelRB) {
+		if(vowelConsonantsChecked == NumerologyConstants.VOWEL) {
 			name = name.replaceAll(NumerologyConstants.CONSONANTS_REGEX, "");
-		} else if(vowelConsonantsChecked == R.id.consonantRB) {
+		} else if(vowelConsonantsChecked == NumerologyConstants.CONSONANT) {
 			name = name.replaceAll(NumerologyConstants.VOWEL_REGEX, "");
 		}
 		parts = name.split("(?!^)");

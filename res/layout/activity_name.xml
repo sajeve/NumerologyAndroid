@@ -33,20 +33,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RadioGroup
-            android:id="@+id/nameSystemRG"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <RadioButton
-                android:id="@+id/pythagoreanRB"
-                android:checked="true"
-                android:text="Pythagorean" />
-
-            <RadioButton
-                android:id="@+id/chaldeanRB"
-                android:text="Chaldean" />
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/system_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/system_array" />
+        
     </LinearLayout>
 
     <LinearLayout
@@ -59,24 +51,12 @@
             android:layout_height="3dp"
             android:background="@android:color/darker_gray" />
 
-        <RadioGroup
-            android:id="@+id/vowelConsonantRG"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <RadioButton
-                android:id="@+id/wholeNameRB"
-                android:checked="true"
-                android:text="Whole Name" />
-
-            <RadioButton
-                android:id="@+id/vowelRB"
-                android:text="Vowel" />
-
-            <RadioButton
-                android:id="@+id/consonantRB"
-                android:text="Consonants" />
-        </RadioGroup>
+        <Spinner
+            android:id="@+id/vowelconsonants_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/vowelconsonant_array" />
+        
     </LinearLayout>
 
     <LinearLayout

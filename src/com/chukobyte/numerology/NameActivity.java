@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.chukobyte.numerology.utils.NameMethods;
@@ -32,15 +32,25 @@ public class NameActivity extends Activity {
 	public void calculateName(View view) {
 		EditText nameText = (EditText) findViewById(R.id.nameET);
 		TextView resultsTV = (TextView) findViewById(R.id.resultsTV);
-		RadioGroup systemRG = (RadioGroup) findViewById(R.id.nameSystemRG);
-		RadioGroup vowelConsonantRG = (RadioGroup) findViewById(R.id.vowelConsonantRG);
-		String results;
-		int selectedSystemId = systemRG.getCheckedRadioButtonId();
-		int selectedVowelConsonantId = vowelConsonantRG.getCheckedRadioButtonId();
+		//Spinner
+		Spinner systemSpinner = (Spinner) findViewById(R.id.system_spinner);
+		ArrayAdapter<CharSequence> systemAdapter = ArrayAdapter.createFromResource(this,
+		        R.array.system_array, android.R.layout.simple_spinner_item);
+		systemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		systemSpinner.setAdapter(systemAdapter);
+		Spinner vowelConsonantSpinner = (Spinner) findViewById(R.id.vowelconsonants_spinner);
+		ArrayAdapter<CharSequence> vowelConsonantAdapter = ArrayAdapter.createFromResource(this,
+		        R.array.vowelconsonant_array, android.R.layout.simple_spinner_item);
+		vowelConsonantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		vowelConsonantSpinner.setAdapter(vowelConsonantAdapter);
 		
-		if(selectedSystemId == R.id.pythagoreanRB) {
+		String results;
+		int selectedSystemId = (int) systemSpinner.getSelectedItemPosition();
+		int selectedVowelConsonantId = (int) vowelConsonantSpinner.getSelectedItemPosition();
+		
+		if(selectedSystemId == NumerologyConstants.PYTHAGOREAN_SYSTEM) {
 			results = nm.calculateNameValue(nameText.getText().toString(), NumerologyConstants.PYTHAGOREAN_SYSTEM, selectedVowelConsonantId);
-		} else if (selectedSystemId == R.id.chaldeanRB) {
+		} else if (selectedSystemId == NumerologyConstants.CHALDEAN_SYSTEM) {
 			results = nm.calculateNameValue(nameText.getText().toString(), NumerologyConstants.CHALDEAN_SYSTEM, selectedVowelConsonantId);
 		} else {
 			results = "Error!";

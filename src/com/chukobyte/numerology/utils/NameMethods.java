@@ -3,6 +3,8 @@ package com.chukobyte.numerology.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.chukobyte.numerology.PersonalProfile;
+
 public class NameMethods {
 	
 	BirthdateMethods bm = new BirthdateMethods();
@@ -25,18 +27,25 @@ public class NameMethods {
 			for(String letter:parts) {
 				sum += convertPythagoreanLetter(letter);
 			}
-			//another
 			
 		} else if(system == NumerologyConstants.CHALDEAN_SYSTEM) {
 			for (String letter:parts) {
 				sum += convertChaldeanLetter(letter);
 			}
-			//another
 			
 		}
 		compoundNumber = Integer.toString(sum);
 		stringSum = Integer.toString(addUntilOneDigit(sum));
 		return name + "\n" + compoundNumber + "/" + stringSum;
+	}
+	
+	public void CalculateNameToProfile(String name, int system) {
+		int expressionNumber = calculateSumOfName(name, system, NumerologyConstants.EXPRESSION_NUMBER);
+		int motivationNumber = calculateSumOfName(name, system, NumerologyConstants.MOTIVATION_NUMBER); //vowel
+		int personalityNumber = calculateSumOfName(name, system, NumerologyConstants.PERSONALITY_NUMBER); //consonants
+		PersonalProfile.setExpressionNumber(expressionNumber);
+		PersonalProfile.setMotivationNumber(motivationNumber);
+		PersonalProfile.setPersonalityNumber(personalityNumber);
 	}
 	
 	public int convertPythagoreanLetter(String letter) {
@@ -138,6 +147,47 @@ public class NameMethods {
 		}
 		
 		return number;
+	}
+	
+	public int addUntilOneDigit11and22(int number) { //exceptions for 11 and 22
+		List<Integer> digits = new ArrayList<Integer>();
+		int sum;
+		while(number > 9 && number != 11 && number != 22) {
+			digits.clear();
+			sum = 0;
+			bm.collectDigits(number, digits);
+			for(int tempNumber:digits) {
+				sum += tempNumber;
+			}
+			number = sum;
+		}
+		
+		return number;
+	}
+	
+	public int calculateSumOfName(String name, int system, String type) {
+		String[] parts;
+		int sum = 0;
+		if(type.equals(NumerologyConstants.MOTIVATION_NUMBER)) {
+			name = name.replaceAll(NumerologyConstants.CONSONANTS_REGEX, "");
+		} else if(type.equals(NumerologyConstants.PERSONALITY_NUMBER)) {
+			name = name.replaceAll(NumerologyConstants.VOWEL_REGEX, "");
+		}
+		parts = name.split("(?!^)");
+		
+		if(system == NumerologyConstants.PYTHAGOREAN_SYSTEM) {
+			for(String letter:parts) {
+				sum += convertPythagoreanLetter(letter);
+			}
+			
+		} else if(system == NumerologyConstants.CHALDEAN_SYSTEM) {
+			for (String letter:parts) {
+				sum += convertChaldeanLetter(letter);
+			}
+			
+		}
+		sum = addUntilOneDigit11and22(sum); //exceptions for 11 and 22
+		return sum;
 	}
 	
 }

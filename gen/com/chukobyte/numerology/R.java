@@ -31,8 +31,8 @@ public final class R {
         public static final int action_settings=0x7f09000c;
         public static final int bdButton=0x7f090001;
         public static final int calculateNameButton=0x7f09000a;
-        public static final int characteristics=0x7f09000b;
-        public static final int characteristicsTV=0x7f090003;
+        public static final int characteristicsTVBirthDate=0x7f090003;
+        public static final int characteristicsTVName=0x7f09000b;
         public static final int dpMain=0x7f090000;
         public static final int nameET=0x7f090006;
         public static final int resultsTV=0x7f090009;

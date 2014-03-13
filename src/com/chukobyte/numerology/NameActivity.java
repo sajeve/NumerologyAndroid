@@ -2,6 +2,7 @@ package com.chukobyte.numerology;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -33,41 +34,40 @@ public class NameActivity extends Activity {
 	}
 	
 	public void calculateName(View view) {
+		String name;
 		EditText nameText = (EditText) findViewById(R.id.nameET);
 		TextView resultsTV = (TextView) findViewById(R.id.resultsTV);
+		TextView characteristicText = (TextView) findViewById(R.id.characteristicsTVName);
 		//Numerology System Spinner
 		Spinner systemSpinner = (Spinner) findViewById(R.id.system_spinner);
 		int selectedSystemId = (int) systemSpinner.getSelectedItemPosition();
 		ArrayAdapter<CharSequence> systemAdapter = ArrayAdapter.createFromResource(this,
 		        R.array.system_array, android.R.layout.simple_spinner_item);
 		systemAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		systemSpinner.setAdapter(systemAdapter);
 		//Vowel Consonant Spinner
 		Spinner vowelConsonantSpinner = (Spinner) findViewById(R.id.vowelconsonants_spinner);
 		int selectedVowelConsonantId = (int) vowelConsonantSpinner.getSelectedItemPosition();
 		ArrayAdapter<CharSequence> vowelConsonantAdapter = ArrayAdapter.createFromResource(this,
 		        R.array.vowelconsonant_array, android.R.layout.simple_spinner_item);
 		vowelConsonantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//		vowelConsonantSpinner.setAdapter(vowelConsonantAdapter);
 		String results;
+		name = nameText.getText().toString();
+		results = nm.calculateNameValue(name, selectedSystemId, selectedVowelConsonantId);
 		
-		if(selectedSystemId == NumerologyConstants.PYTHAGOREAN_SYSTEM) {
-			results = nm.calculateNameValue(nameText.getText().toString(), NumerologyConstants.PYTHAGOREAN_SYSTEM, selectedVowelConsonantId);
-		} else if (selectedSystemId == NumerologyConstants.CHALDEAN_SYSTEM) {
-			results = nm.calculateNameValue(nameText.getText().toString(), NumerologyConstants.CHALDEAN_SYSTEM, selectedVowelConsonantId);
-		} else {
-			results = "Error!";
-		}
-		
+		nm.CalculateNameToProfile(name, selectedSystemId);
+		characteristicText.setClickable(true);
+        characteristicText.setTextColor(Color.BLUE);
+        characteristicText.setText("Click here to view characteristics");
 		resultsTV.setText(results);
 	}
 	
 	public void characteristicClick(View view) {
-//		Intent intent = new Intent(this, ResultsActivity.class);
-//		intent.putExtra(NumerologyConstants.EXPRESSION_NUMBER, PersonalProfile.getExpressionNumber());
-//		intent.putExtra(NumerologyConstants.PERSONALITY_NUMBER, PersonalProfile.getPersonalityNumber());
-//		intent.putExtra(NumerologyConstants.MOTIVATION_NUMBER, PersonalProfile.getMotivationNumber());
-//		startActivity(intent);
+		Intent intent = new Intent(this, CharacteristicActivity.class);
+		intent.putExtra(NumerologyConstants.CHARACTERISTIC, NumerologyConstants.NAME);
+		intent.putExtra(NumerologyConstants.EXPRESSION_NUMBER, PersonalProfile.getExpressionNumber());
+		intent.putExtra(NumerologyConstants.PERSONALITY_NUMBER, PersonalProfile.getPersonalityNumber());
+		intent.putExtra(NumerologyConstants.MOTIVATION_NUMBER, PersonalProfile.getMotivationNumber());
+		startActivity(intent);
 	}
 
 }

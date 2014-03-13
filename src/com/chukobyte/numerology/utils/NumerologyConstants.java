@@ -2,6 +2,11 @@ package com.chukobyte.numerology.utils;
 
 public class NumerologyConstants {
 	
+	//Characteristic Switch
+	public static final String CHARACTERISTIC = "CHARACTERISTIC_SWITCH";
+	public static final String BIRTHDATE = "BIRTHDATE_CHARACTERISTIC";
+	public static final String NAME = "NAME_CHARACTERISTIC";
+	
 	public static final String RULING_NUMBER = "RULING_NUMBER";
 	public static final String DAY_NUMBER = "DAY_NUMBER";
 	public static final String EXPRESSION_NUMBER = "EXPRESSION_NUMBER";

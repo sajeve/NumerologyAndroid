@@ -2,6 +2,9 @@ package com.chukobyte.numerology;
 
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -9,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.chukobyte.numerology.utils.BirthdateMethods;
+import com.chukobyte.numerology.utils.NumerologyConstants;
 
 public class BirthdateActivity extends Activity {
 	
@@ -18,6 +22,8 @@ public class BirthdateActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_birthdate);
+		
+		PersonalProfile.resetProfile();
 	}
 
 	@Override
@@ -28,24 +34,40 @@ public class BirthdateActivity extends Activity {
 	}
 	
 	public void calculateBirthdate(View view) {
+		TextView characteristicText = (TextView) findViewById(R.id.characteristicsTV);
 		PersonalProfile.setUpdateProfile(true);  //Makes it so Personal Profile can be updated when new
 		DatePicker datePicker = (DatePicker) findViewById(R.id.dpMain);
 		datePicker.clearFocus();
 		TextView resultsText = (TextView) findViewById(R.id.resultsText);
-		int day  = datePicker.getDayOfMonth();
-        int month= datePicker.getMonth() + 1;
-        int year = datePicker.getYear();
+		Integer day  = datePicker.getDayOfMonth();
+        Integer month= datePicker.getMonth() + 1;
+        Integer year = datePicker.getYear();
         String birthDate = bc.formatNumberForDate(month)+ "/" + bc.formatNumberForDate(day) + "/" +
         		bc.formatNumberForDate(year);
-        Integer fullRulingNumber = bc.calculateRulingNumber(birthDate);
+        Integer fullRulingNumber = bc.calculateSumOfNumbers(birthDate);
         PersonalProfile.setUpdateProfile(false);  //makes it so it don't override Personal Profile's array full of bd digits
-        Integer rulingNumber = bc.calculateRulingNumber(fullRulingNumber.toString());
+        Integer rulingNumber = bc.calculateSumOfNumbers(fullRulingNumber.toString());
         if(rulingNumber > 11) {
-        	rulingNumber = bc.calculateRulingNumber(rulingNumber.toString());
+        	rulingNumber = bc.calculateSumOfNumbers(rulingNumber.toString());
         }
+        
+        //for Personal Profile
+        PersonalProfile.setRulingNumber(rulingNumber);
+        PersonalProfile.setDayNumber(bc.calculateSumOfNumbers(day.toString()));
+        
+        characteristicText.setClickable(true);
+        characteristicText.setTextColor(Color.BLUE);
+        characteristicText.setText("Click here to view characteristics");
         String results = "Birthdate = " + birthDate + "\nRuling number = " + 
         fullRulingNumber + "/" + rulingNumber;
         resultsText.setText(results);
+	}
+	
+	public void characteristicClick(View view) {
+		Intent intent = new Intent(this, CharacteristicActivity.class);
+		intent.putExtra(NumerologyConstants.RULING_NUMBER, PersonalProfile.getRulingNumber()); //todo add ruling number from PersonalProfile
+		intent.putExtra(NumerologyConstants.DAY_NUMBER, PersonalProfile.getDayNumber()); //todo add day number from PersonalProfile
+		startActivity(intent);
 	}
 	
 }

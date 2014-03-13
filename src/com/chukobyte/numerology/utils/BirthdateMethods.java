@@ -17,7 +17,7 @@ public class BirthdateMethods {
 		return numberText;
 	}
 	
-	public int calculateRulingNumber(String birthDate) {
+	public int calculateSumOfNumbers(String birthDate) {
 		List<Integer> digits = new ArrayList<Integer>();
 		int bd = Integer.parseInt(birthDate.replace("/", ""));
 		int sum = 0;
@@ -26,9 +26,9 @@ public class BirthdateMethods {
 			sum += number;
 		}
 		
-		if(PersonalProfile.isUpdateProfile()) { //Give array of digits to Personal Profile
-	    	PersonalProfile.setDigits(digits);
-	    }
+//		if(PersonalProfile.isUpdateProfile()) { //Give array of digits to Personal Profile
+//	    	PersonalProfile.setDigits(digits);
+//	    }
 		
 		return sum;
 	}

@@ -22,8 +22,6 @@ public class NameActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
-		
-		PersonalProfile.resetProfile();
 	}
 
 	@Override
@@ -34,7 +32,6 @@ public class NameActivity extends Activity {
 	}
 	
 	public void calculateName(View view) {
-		String name;
 		EditText nameText = (EditText) findViewById(R.id.nameET);
 		TextView resultsTV = (TextView) findViewById(R.id.resultsTV);
 		TextView characteristicText = (TextView) findViewById(R.id.characteristicsTVName);
@@ -50,14 +47,17 @@ public class NameActivity extends Activity {
 		ArrayAdapter<CharSequence> vowelConsonantAdapter = ArrayAdapter.createFromResource(this,
 		        R.array.vowelconsonant_array, android.R.layout.simple_spinner_item);
 		vowelConsonantAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
 		String results;
+		String name;
 		name = nameText.getText().toString();
 		results = nm.calculateNameValue(name, selectedSystemId, selectedVowelConsonantId);
-		
-		nm.CalculateNameToProfile(name, selectedSystemId);
+		nm.calculateNameToProfile(name, selectedSystemId);
+		//Setting clickable TextView
 		characteristicText.setClickable(true);
         characteristicText.setTextColor(Color.BLUE);
         characteristicText.setText("Click here to view characteristics");
+        
 		resultsTV.setText(results);
 	}
 	

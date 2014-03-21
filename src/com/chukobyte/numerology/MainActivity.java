@@ -7,11 +7,15 @@ import android.view.Menu;
 import android.view.View;
 
 public class MainActivity extends Activity {
+	
+	public static String PACKAGE_NAME;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		PACKAGE_NAME = getApplicationContext().getPackageName();
 	}
 
 	@Override

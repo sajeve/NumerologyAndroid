@@ -17,8 +17,8 @@ public class PersonalProfile {
 	
 	//name related
 	private static int expressionNumber;
-	private static int personalityNumber;
-	private static int motivationNumber;
+	private static int personalityNumber;  //consonant
+	private static int motivationNumber; //vowel
 	
 	public static void resetProfile() {
 		setRulingNumber(-1);

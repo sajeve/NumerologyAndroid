@@ -9,7 +9,8 @@ public class NameMethods {
 	
 	BirthdateMethods bm = new BirthdateMethods();
 	
-	public String calculateNameValue(String name, int system, int vowelConsonantsChecked) { //add parameter for vowel/consonant distinction
+	//Used to return String to text view
+	public String calculateNameValue(String name, int system, int vowelConsonantsChecked) {
 		String[] parts;
 		int sum = 0;
 		String stringSum;
@@ -39,13 +40,70 @@ public class NameMethods {
 		return name + "\n" + compoundNumber + "/" + stringSum;
 	}
 	
-	public void CalculateNameToProfile(String name, int system) {
+	public void calculateNameToProfile(String name, int system) {
 		int expressionNumber = calculateSumOfName(name, system, NumerologyConstants.EXPRESSION_NUMBER);
 		int motivationNumber = calculateSumOfName(name, system, NumerologyConstants.MOTIVATION_NUMBER); //vowel
 		int personalityNumber = calculateSumOfName(name, system, NumerologyConstants.PERSONALITY_NUMBER); //consonants
 		PersonalProfile.setExpressionNumber(expressionNumber);
 		PersonalProfile.setMotivationNumber(motivationNumber);
 		PersonalProfile.setPersonalityNumber(personalityNumber);
+	}
+	
+	public int calculateSumOfName(String name, int system, String type) {
+		String[] parts;
+		int sum = 0;
+		if(type.equals(NumerologyConstants.MOTIVATION_NUMBER)) {
+			name = name.replaceAll(NumerologyConstants.CONSONANTS_REGEX, "");
+		} else if(type.equals(NumerologyConstants.PERSONALITY_NUMBER)) {
+			name = name.replaceAll(NumerologyConstants.VOWEL_REGEX, "");
+		}
+		parts = name.split("(?!^)");
+		
+		if(system == NumerologyConstants.PYTHAGOREAN_SYSTEM) {
+			for(String letter:parts) {
+				sum += convertPythagoreanLetter(letter);
+			}
+			
+		} else if(system == NumerologyConstants.CHALDEAN_SYSTEM) {
+			for (String letter:parts) {
+				sum += convertChaldeanLetter(letter);
+			}
+			
+		}
+		sum = addUntilOneDigit11and22(sum); //exceptions for 11 and 22
+		return sum;
+	}
+	
+	public int addUntilOneDigit(int number) {
+		List<Integer> digits = new ArrayList<Integer>();
+		int sum;
+		while(number > 9) {
+			digits.clear();
+			sum = 0;
+			bm.collectDigits(number, digits);
+			for(int tempNumber:digits) {
+				sum += tempNumber;
+			}
+			number = sum;
+		}
+		
+		return number;
+	}
+	
+	public int addUntilOneDigit11and22(int number) { //exceptions for 11 and 22
+		List<Integer> digits = new ArrayList<Integer>();
+		int sum;
+		while(number > 9 && number != 11 && number != 22) {
+			digits.clear();
+			sum = 0;
+			bm.collectDigits(number, digits);
+			for(int tempNumber:digits) {
+				sum += tempNumber;
+			}
+			number = sum;
+		}
+		
+		return number;
 	}
 	
 	public int convertPythagoreanLetter(String letter) {
@@ -112,82 +170,6 @@ public class NameMethods {
 		else {
 			return 0;
 		}
-	}
-	
-	public boolean isVowel(String letter) {
-		if(letter.equalsIgnoreCase("a") || letter.equalsIgnoreCase("e") || letter.equalsIgnoreCase("i") 
-				|| letter.equalsIgnoreCase("o") || letter.equalsIgnoreCase("u")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	//to do
-	//make method to determine if y is a vowel
-	public boolean isVowel(String letter, boolean isYAVowel) {
-		if(letter.equalsIgnoreCase("y") && isYAVowel) {
-			return true;
-		} else {
-			return isVowel(letter);
-		}
-	}
-	
-	public int addUntilOneDigit(int number) {
-		List<Integer> digits = new ArrayList<Integer>();
-		int sum;
-		while(number > 9) {
-			digits.clear();
-			sum = 0;
-			bm.collectDigits(number, digits);
-			for(int tempNumber:digits) {
-				sum += tempNumber;
-			}
-			number = sum;
-		}
-		
-		return number;
-	}
-	
-	public int addUntilOneDigit11and22(int number) { //exceptions for 11 and 22
-		List<Integer> digits = new ArrayList<Integer>();
-		int sum;
-		while(number > 9 && number != 11 && number != 22) {
-			digits.clear();
-			sum = 0;
-			bm.collectDigits(number, digits);
-			for(int tempNumber:digits) {
-				sum += tempNumber;
-			}
-			number = sum;
-		}
-		
-		return number;
-	}
-	
-	public int calculateSumOfName(String name, int system, String type) {
-		String[] parts;
-		int sum = 0;
-		if(type.equals(NumerologyConstants.MOTIVATION_NUMBER)) {
-			name = name.replaceAll(NumerologyConstants.CONSONANTS_REGEX, "");
-		} else if(type.equals(NumerologyConstants.PERSONALITY_NUMBER)) {
-			name = name.replaceAll(NumerologyConstants.VOWEL_REGEX, "");
-		}
-		parts = name.split("(?!^)");
-		
-		if(system == NumerologyConstants.PYTHAGOREAN_SYSTEM) {
-			for(String letter:parts) {
-				sum += convertPythagoreanLetter(letter);
-			}
-			
-		} else if(system == NumerologyConstants.CHALDEAN_SYSTEM) {
-			for (String letter:parts) {
-				sum += convertChaldeanLetter(letter);
-			}
-			
-		}
-		sum = addUntilOneDigit11and22(sum); //exceptions for 11 and 22
-		return sum;
 	}
 	
 }

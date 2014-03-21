@@ -3,7 +3,6 @@ package com.chukobyte.numerology;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -46,20 +45,18 @@ public class BirthdateActivity extends Activity {
         		bc.formatNumberForDate(year);
         Integer fullRulingNumber = bc.calculateSumOfNumbers(birthDate);
         PersonalProfile.setUpdateProfile(false);  //makes it so it don't override Personal Profile's array full of bd digits
-        Integer rulingNumber = bc.calculateSumOfNumbers(fullRulingNumber.toString());
-        while(rulingNumber > 11) {
-        	rulingNumber = bc.calculateSumOfNumbers(rulingNumber.toString());
-        }
+        Integer stringRulingNumber = bc.calculateSumOfNumbers(fullRulingNumber.toString());
+        Integer rulingNumber = bc.addUntilOneDigit11and22(fullRulingNumber);
         
         //for Personal Profile
         PersonalProfile.setRulingNumber(rulingNumber);
-        PersonalProfile.setDayNumber(bc.calculateSumOfNumbers(day.toString()));
+        PersonalProfile.setDayNumber(bc.addUntilOneDigit11and22(day));
         
         characteristicText.setClickable(true);
         characteristicText.setTextColor(Color.BLUE);
         characteristicText.setText("Click here to view characteristics");
         String results = "Birthdate = " + birthDate + "\nRuling number = " + 
-        fullRulingNumber + "/" + rulingNumber;
+        fullRulingNumber + "/" + stringRulingNumber;
         resultsText.setText(results);
 	}
 	

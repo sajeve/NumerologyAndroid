@@ -3,8 +3,6 @@ package com.chukobyte.numerology.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.chukobyte.numerology.PersonalProfile;
-
 public class BirthdateMethods {
 	
 	public String formatNumberForDate(int number) {
@@ -26,11 +24,23 @@ public class BirthdateMethods {
 			sum += number;
 		}
 		
-//		if(PersonalProfile.isUpdateProfile()) { //Give array of digits to Personal Profile
-//	    	PersonalProfile.setDigits(digits);
-//	    }
-		
 		return sum;
+	}
+	
+	public int addUntilOneDigit11and22(int number) { //exceptions for 11 and 22
+		List<Integer> digits = new ArrayList<Integer>();
+		int sum;
+		while(number > 11 && number != 22) {
+			digits.clear();
+			sum = 0;
+			collectDigits(number, digits);
+			for(int tempNumber:digits) {
+				sum += tempNumber;
+			}
+			number = sum;
+		}
+		
+		return number;
 	}
 	
 	

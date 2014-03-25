@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chukobyte.numerology.utils.NameMethods;
 import com.chukobyte.numerology.utils.NumerologyConstants;
@@ -54,11 +56,17 @@ public class NameActivity extends Activity {
 		results = nm.calculateNameValue(name, selectedSystemId, selectedVowelConsonantId);
 		nm.calculateNameToProfile(name, selectedSystemId);
 		//Setting clickable TextView
-		characteristicText.setClickable(true);
-        characteristicText.setTextColor(Color.BLUE);
-        characteristicText.setText("Click here to view characteristics");
+		if(PersonalProfile.getExpressionNumber() > 1) { //if there is a value for names
+			characteristicText.setClickable(true);
+	        characteristicText.setTextColor(Color.BLUE);
+//	        characteristicText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+	        characteristicText.setText("Click here to view characteristics");
+	        resultsTV.setText(results);
+		} else {
+			Toast toast = Toast.makeText(this, "Enter a name!", Toast.LENGTH_SHORT);
+			toast.show();
+		}
         
-		resultsTV.setText(results);
 	}
 	
 	public void characteristicClick(View view) {

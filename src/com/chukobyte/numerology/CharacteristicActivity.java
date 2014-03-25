@@ -28,7 +28,7 @@ public class CharacteristicActivity extends Activity {
 		int dayNumber = intent.getIntExtra(NumerologyConstants.DAY_NUMBER, 0);
 		result = "Ruling Number = " + rulingNumber + 
 				"\n" + cm.rulingNumberDescription(rulingNumber) + 
-				"\nDay Number = " + dayNumber + 
+				"\n\nDay Number = " + dayNumber + 
 				"\n" + cm.dayNumberDescription(dayNumber);
 		} else if (intent.getStringExtra(NumerologyConstants.CHARACTERISTIC).equals(NumerologyConstants.NAME)) {
 			int expressionNumber = intent.getIntExtra(NumerologyConstants.EXPRESSION_NUMBER, 0);
@@ -36,9 +36,9 @@ public class CharacteristicActivity extends Activity {
 			int motivationNumber = intent.getIntExtra(NumerologyConstants.MOTIVATION_NUMBER, 0);
 			result = "Expression Number = " + expressionNumber + 
 					"\n" + cm.expressionNumberDescription(expressionNumber) +
-					"\nPersonality Number = " + personalityNumber + 
+					"\n\nPersonality Number = " + personalityNumber + 
 					"\n" + cm.personalityNumberDescription(personalityNumber) +
-					"\nMotivation Number = " + motivationNumber +
+					"\n\nMotivation Number = " + motivationNumber +
 					"\n" + cm.motivationNumberDescription(motivationNumber);
 		} else {
 			result = "Error!";

@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:endYear="2100"
-        android:startYear="1900" />
+        android:startYear="1000" />
 
     <Button
         android:id="@+id/bdButton"

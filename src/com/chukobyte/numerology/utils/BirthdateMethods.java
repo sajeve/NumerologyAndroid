@@ -15,7 +15,7 @@ public class BirthdateMethods {
 		return numberText;
 	}
 	
-	public int calculateSumOfNumbers(String birthDate) {
+	public int calculateSumOfNumbersCompoundRulingNumber(String birthDate) {
 		List<Integer> digits = new ArrayList<Integer>();
 		int bd = Integer.parseInt(birthDate.replace("/", ""));
 		int sum = 0;
@@ -27,10 +27,26 @@ public class BirthdateMethods {
 		return sum;
 	}
 	
-	public int addUntilOneDigit11and22(int number) { //exceptions for 11 and 22
+	public int addUntilOneDigitRulingNumber(int number) { //exceptions for 11 and 22
 		List<Integer> digits = new ArrayList<Integer>();
 		int sum;
 		while(number > 11 && number != 22) {
+			digits.clear();
+			sum = 0;
+			collectDigits(number, digits);
+			for(int tempNumber:digits) {
+				sum += tempNumber;
+			}
+			number = sum;
+		}
+		
+		return number;
+	}
+	
+	public int addUntilOneDigitDayNumber(int number) {
+		List<Integer> digits = new ArrayList<Integer>();
+		int sum;
+		while(number > 9) {
 			digits.clear();
 			sum = 0;
 			collectDigits(number, digits);

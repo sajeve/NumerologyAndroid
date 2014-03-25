@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PersonalProfile {
-	
-	//Static class that stores all information about one person
-	
+
+	// Static class that stores all information about one person
+
 	private static List<Integer> digits = new ArrayList<Integer>();
 	private static boolean updateProfile = true;
-	
-	//-1 is default for number not set
-	//birthdate related
+
+	// -1 is default for number not set
+	// birthdate related
 	private static int rulingNumber;
 	private static int dayNumber;
-	
-	//name related
+
+	// name related
 	private static int expressionNumber;
-	private static int personalityNumber;  //consonant
-	private static int motivationNumber; //vowel
-	
+	private static int personalityNumber; // consonant
+	private static int motivationNumber; // vowel
+
 	public static void resetProfile() {
 		setRulingNumber(-1);
 		setDayNumber(-1);
@@ -83,11 +83,5 @@ public class PersonalProfile {
 	public static void setMotivationNumber(int motivationNumber) {
 		PersonalProfile.motivationNumber = motivationNumber;
 	}
-	
-	
-	
-	
-	
-	
 
 }

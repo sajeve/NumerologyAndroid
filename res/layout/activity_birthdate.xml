@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,31 +8,37 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BirthdateActivity" >
+    
+    <include layout="@layout/header" android:layout_alignParentTop="true" android:id="@+id/head"/>
 
     <DatePicker
         android:id="@+id/dpMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:endYear="2100"
-        android:startYear="1000" />
+        android:startYear="1000"
+        android:layout_below="@+id/head" />
 
     <Button
         android:id="@+id/bdButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="calculateBirthdate"
-        android:text="Calculate Birthdate" />
+        android:text="Calculate Birthdate" 
+        android:layout_below="@id/dpMain"/>
 
     <TextView
         android:id="@+id/resultsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Birth Date:\nRuling Number:\n" />
+        android:text="Birth Date:\nRuling Number:\n"
+        android:layout_below="@id/bdButton" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:layout_below="@id/resultsText">
 
         <TextView
             android:id="@+id/characteristicsTVBirthDate"
@@ -40,5 +46,7 @@
             android:layout_height="wrap_content"
             android:onClick="characteristicClick" />
     </LinearLayout>
+    
+    <include layout="@layout/footer" android:layout_alignParentBottom="true" android:id="@+id/foot"/>
 
-</LinearLayout>
+</RelativeLayout>

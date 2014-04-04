@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,83 +9,101 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".NameActivity" >
 
+    <include
+        android:id="@+id/head"
+        android:layout_alignParentTop="true"
+        layout="@layout/header" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_height="match_parent"
+        android:layout_above="@id/foot"
+        android:layout_below="@id/head"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Enter Name:" />
-
-        <EditText
-            android:id="@+id/nameET"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
+            android:orientation="horizontal" >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Enter Name:" />
 
-        <Spinner
-            android:id="@+id/system_spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/system_array" />
-    </LinearLayout>
+            <EditText
+                android:id="@+id/nameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@android:color/darker_gray" />
-
-        <Spinner
-            android:id="@+id/vowelconsonants_spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/vowelconsonant_array" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/resultsTV"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="0/0" />
+            android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/calculateNameButton"
-            android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/system_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/system_array" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="calculateName"
-            android:text="Calculate Name" />
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@android:color/darker_gray" />
+
+            <Spinner
+                android:id="@+id/vowelconsonants_spinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/vowelconsonant_array" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/resultsTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0/0" />
+
+            <Button
+                android:id="@+id/calculateNameButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="calculateName"
+                android:text="Calculate Name" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/characteristicsTVName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="characteristicClick" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+    <include
+        android:id="@+id/foot"
+        android:layout_alignParentBottom="true"
+        layout="@layout/footer" />
 
-        <TextView
-            android:id="@+id/characteristicsTVName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="characteristicClick" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

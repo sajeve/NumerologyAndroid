@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <include layout="@layout/header" android:layout_alignParentTop="true" android:id="@+id/head"/>
+    
     <Button 
+        android:id="@+id/cbButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Calculate Birthdate"
-        android:onClick="goToBirthdateActivity"/>
+        android:onClick="goToBirthdateActivity"
+        android:layout_below="@id/head"/>
     <Button 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Calculate Name"
-        android:onClick="goToNameActivity"/>
+        android:onClick="goToNameActivity"
+        android:layout_below="@+id/cbButton"/>
+    
+    <include layout="@layout/footer" android:layout_alignParentBottom="true" android:id="@+id/foot"/>
     
 
-</LinearLayout>
+</RelativeLayout>

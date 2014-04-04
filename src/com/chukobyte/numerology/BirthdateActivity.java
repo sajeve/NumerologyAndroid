@@ -65,8 +65,8 @@ public class BirthdateActivity extends Activity {
 	public void characteristicClick(View view) {
 		Intent intent = new Intent(this, CharacteristicActivity.class);
 		intent.putExtra(NumerologyConstants.CHARACTERISTIC, NumerologyConstants.BIRTHDATE);
-		intent.putExtra(NumerologyConstants.RULING_NUMBER, PersonalProfile.getRulingNumber()); //todo add ruling number from PersonalProfile
-		intent.putExtra(NumerologyConstants.DAY_NUMBER, PersonalProfile.getDayNumber()); //todo add day number from PersonalProfile
+		intent.putExtra(NumerologyConstants.RULING_NUMBER, PersonalProfile.getRulingNumber());
+		intent.putExtra(NumerologyConstants.DAY_NUMBER, PersonalProfile.getDayNumber());
 		startActivity(intent);
 	}
 	

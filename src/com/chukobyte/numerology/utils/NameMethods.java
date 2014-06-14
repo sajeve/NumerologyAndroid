@@ -36,7 +36,7 @@ public class NameMethods {
 			
 		}
 		compoundNumber = Integer.toString(sum);
-		stringSum = Integer.toString(addUntilOneDigit(sum));
+		stringSum = Integer.toString(addUntilOneDigit10and11and22(sum));
 		return name + "\n" + compoundNumber + "/" + stringSum;
 	}
 	
@@ -70,7 +70,7 @@ public class NameMethods {
 			}
 			
 		}
-		sum = addUntilOneDigit11and22(sum); //exceptions for 11 and 22
+		sum = addUntilOneDigit10and11and22(sum); //exceptions for 10, 11 and 22
 		return sum;
 	}
 	
@@ -94,6 +94,22 @@ public class NameMethods {
 		List<Integer> digits = new ArrayList<Integer>();
 		int sum;
 		while(number > 9 && number != 11 && number != 22) {
+			digits.clear();
+			sum = 0;
+			bm.collectDigits(number, digits);
+			for(int tempNumber:digits) {
+				sum += tempNumber;
+			}
+			number = sum;
+		}
+		
+		return number;
+	}
+	
+	public int addUntilOneDigit10and11and22(int number) { //exceptions for 10, 11 and 22
+		List<Integer> digits = new ArrayList<Integer>();
+		int sum;
+		while(number > 11 && number != 22) {
 			digits.clear();
 			sum = 0;
 			bm.collectDigits(number, digits);
